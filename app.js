@@ -16,15 +16,25 @@ function DragLeave(e) {
 }
 
 function dragDrop(e) {
-    e.target.append(beingDragged);
-    e.target.classList.remove("highlight");
-    infoDisplay.textContent = "You have dropped something into " + e.target.classList;
+    const hasKing = e.target.contains(king);
+
+    if (!hasKing) {
+        e.target.append(beingDragged);
+        e.target.classList.remove("highlight");
+        infoDisplay.textContent = "You have dropped something into " + e.target.classList;
+    } else {
+        infoDisplay.textContent = "It looks like the king did not move too far ;)"
+    }
 }
 
 function dragEnd(e) {
-    e.target.classList.add("target");
-    setTimeout(() => e.target.classList.remove("target"), 100);
-    infoDisplay.textContent = "Your drag has ended in " + e.target.classList;
+    const hasKing = e.target.contains(king);
+
+    if (!hasKing) {
+        e.target.classList.add("target");
+        setTimeout(() => e.target.classList.remove("target"), 100);
+        infoDisplay.textContent = "Your drag has ended in " + e.target.classList;
+    }
 }
 
 function dragOver (e) {
